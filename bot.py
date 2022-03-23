@@ -47,7 +47,17 @@ def show(update: Update, context: CallbackContext) -> None :
     update.message.reply_text(showPlayList())
 
 def search(msg) :
-    return YoutubeSearch(msg, max_results=10).to_dict()
+    results = YoutubeSearch(msg, max_results=15).to_dict()
+    new_results = []
+    count = 0
+    for i in range(len(results)) :
+        if results[i]['duration'] == 0 :
+            continue
+        if count == 10 :
+            break
+        new_results.append(results[i])
+        count += 1
+    return new_results
 
 def add(update: Update, context: CallbackContext) -> None :
     global user_status
