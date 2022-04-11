@@ -55,6 +55,7 @@ def search(msg) :
             continue
         if count == 10 :
             break
+        results[i]['url_suffix'] = results[i]['url_suffix'].replace('shorts/', 'watch?v=')
         new_results.append(results[i])
         count += 1
     return new_results
