@@ -200,7 +200,7 @@ def msg(update: Update, context: CallbackContext) :
 def start(update: Update, context: CallbackContext) -> None :
     keyboard = [
         [KeyboardButton(text='/add'), KeyboardButton(text='/play'), KeyboardButton(text='/pause'), KeyboardButton(text='/skip'), KeyboardButton(text='/stop')],
-        [KeyboardButton(text='/vol_up'), KeyboardButton(text='/show'), KeyboardButton(text='/vol_down')],
+        [KeyboardButton(text='/vol_down'), KeyboardButton(text='/show'), KeyboardButton(text='/vol_up')],
         [KeyboardButton(text='/broadcast')],
         [KeyboardButton(text='/start')]
     ]
