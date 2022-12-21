@@ -30,12 +30,14 @@
     - `git clone https://github.com/UncleHanWei/PA_Bot.git`
 4. Dependencies
     - 要運作此專案，需要安裝如下的套件。
+    - `telegram`
+        - `pip3 install python-telegram-bot`
+    - `dotenv`
+        - `pip3 install python-dotenv`
     - `vlc player`
         - `sudo apt install vlc`
     - `PulseAudio`
         `sudo apt install pulseaudio`
-    - `telepot`
-        - `pip3 install telepot`
     - `gTTs`
         - `pip3 install gTTs`
     - `pafy`
@@ -47,6 +49,6 @@
     - `youtube_search`
         - `pip3 install youtube_search`
 5. 建立 TOKEN 檔案
-    - 把機器人的 TOKEN 寫入 TOKEN.txt 中，以便程式和機器人做連接。
+    - 把機器人的 TOKEN 寫入 .env 中，以便程式和機器人做連接。
 6. 啟動程式
     - 做好前置作業之後，便可以啟動程式測試機器人是否能運作了。
