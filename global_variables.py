@@ -1,0 +1,9 @@
+# global variables
+user_status = dict()
+playStatus = 'stop'
+isPlaying = False
+playList = []
+playing_thread = None
+player = None
+volume = 0
+stopCmd = False

@@ -1,0 +1,14 @@
+[Unit]
+Description=PA Bot, to play music and broadcasting
+After=network.target
+
+[Service]
+WorkingDirectory=/home/pi/PA_Bot/
+ExecStart=/home/pi/.local/bin/pipenv run python3.10 /home/pi/PA_Bot/bot.py &
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

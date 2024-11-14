@@ -3,6 +3,12 @@
 本專案為 [MOLi-PA-Bot](https://github.com/NCNU-OpenSource/MOLi-PA-Bot) 的更新版本
 由於套件和程式架構的各種問題，因此另開此一新的專案來修正這些問題
 
+Update 2024-11-14:
+更新所使用的 Python 版本至 3.10
+增加虛擬環境 pipenv 簡化部署和相依套件管理
+更新套件，棄用 youtube_dl、pafy，改用 pytubefix
+更新程式架構，將模組切分開，增加程式的易讀性和維護性
+
 ## Bot_id
 @MOLi_PA_bot
 
@@ -30,25 +36,22 @@
     - `git clone https://github.com/UncleHanWei/PA_Bot.git`
 4. Dependencies
     - 要運作此專案，需要安裝如下的套件。
-    - `telegram`
-        - `pip3 install python-telegram-bot`
-    - `dotenv`
-        - `pip3 install python-dotenv`
-    - `vlc player`
-        - `sudo apt install vlc`
-    - `PulseAudio`
-        `sudo apt install pulseaudio`
-    - `gTTs`
-        - `pip3 install gTTs`
-    - `pafy`
-        - `pip3 install pafy`
-    - `vlc`
-        - `pip3 install python-vlc`
-    - `youtube_dl`
-        - `pip3 install youtube_dl`
-    - `youtube_search`
-        - `pip3 install youtube_search`
+    - `pipenv`
+        - `pip3 install pipenv`
+    - other dependencies
+        - 於專案路徑下輸入以下指令
+        - `pipenv install`
 5. 建立 TOKEN 檔案
     - 把機器人的 TOKEN 寫入 .env 中，以便程式和機器人做連接。
 6. 啟動程式
     - 做好前置作業之後，便可以啟動程式測試機器人是否能運作了。
+    - 由於使用了 `pipenv`，因此執行程式的指令需要稍微更改
+    - Windows: `pipenv run python bot.py`
+    - Ubuntu/RaspberryPi: `pipenv run python3 bot.py`
+7. 設定成 systemd 代管的服務
+    - 將 `PA_Bot.service` 放進 `/etc/systemd/system` 中
+    - 下指令: `sudo systemctl enable PA_Bot.service`
+    - 下指令: `sudo systemctl daemon-reload`
+    - 下指令: `sudo systemctl start PA_Bot.service`
+    - 下指令: `sudo systemctl status PA_Bot.service`
+    - 檢查運作狀態，若是正常運作就沒有問題了
