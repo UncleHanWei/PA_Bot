@@ -5,7 +5,7 @@ from global_variables import (
     user_status, playStatus, isPlaying, playList,
     playing_thread, player, volume, stopCmd
 )
-from pytubefix import YouTube
+from pytubefix import YouTube, exceptions
 import vlc
 import threading
 
@@ -51,24 +51,31 @@ async def add(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None :
 # play song
 def playMusic(msg) :
     global player, playStatus, volume
-    url = "https://www.youtube.com" + msg
-    yt = YouTube(url.strip())
-    stream = yt.streams.filter(only_audio=True).first()
-    stream_url = stream.url
-    instance = vlc.Instance("prefer-insecure")
-    player = instance.media_player_new()
-    media = instance.media_new(stream_url)
-    player.set_media(media)
-    volume = 60
-    player.audio_set_volume(volume)
-    player.play()
-    sleep(5)
-    playStatus = 'play'
-    while playStatus != 'stop' and (player.is_playing() == 1 or playStatus == 'pause') :
-        sleep(0.5)
-    player.stop()
-    playStatus = 'stop'
-    return
+    try :
+        url = "https://www.youtube.com" + msg
+        yt = YouTube(url.strip())
+        stream = yt.streams.filter(only_audio=True).first()
+        stream_url = stream.url
+        instance = vlc.Instance("prefer-insecure")
+        player = instance.media_player_new()
+        media = instance.media_new(stream_url)
+        player.set_media(media)
+        volume = 60
+        player.audio_set_volume(volume)
+        player.play()
+        sleep(5)
+        playStatus = 'play'
+        while playStatus != 'stop' and (player.is_playing() == 1 or playStatus == 'pause') :
+            sleep(0.5)
+        player.stop()
+        playStatus = 'stop'
+        return
+    except exceptions.AgeRestrictedError :
+        print("AgeRestrictedError")
+    except Exception :
+        print("Exception")
+    finally :
+        return
 
 
 async def play(update: Update, context: ContextTypes.DEFAULT_TYPE) :
